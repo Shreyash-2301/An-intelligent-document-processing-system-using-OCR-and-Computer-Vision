@@ -1,0 +1,14 @@
+opencv-python
+pytesseract
+numpy
+pandas
+Pillow
+pdf2image
+matplotlib
+python-docx
+PyYAML
+pytest
+easyocr
+scikit-image
+reportlab
+tqdm

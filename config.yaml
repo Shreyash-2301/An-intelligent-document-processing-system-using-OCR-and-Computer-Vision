@@ -1,0 +1,51 @@
+# OCR Configuration
+ocr:
+  engine: 'tesseract'  # Options: 'tesseract' or 'easyocr'
+  language: 'eng'
+  confidence_threshold: 60  # Minimum confidence score (0-100)
+  
+# Image Processing
+image:
+  preprocessing:
+    resize_width: 1600  # Max width to resize image to
+    min_text_height: 10  # Minimum text height in pixels
+    denoise_strength: 3  # Strength of denoising (1-10)
+  
+  contours:
+    min_area: 1000  # Minimum contour area
+    max_area: 500000  # Maximum contour area
+    min_aspect_ratio: 0.1  # Minimum width/height ratio
+    max_aspect_ratio: 10.0  # Maximum width/height ratio
+
+# Data Extraction
+extraction:
+  patterns:
+    date: '\d{1,2}[-/]\d{1,2}[-/]\d{2,4}'
+    email: '[\w\.-]+@[\w\.-]+\.\w+'
+    phone: '\+?\d{1,3}[-.]?\d{3}[-.]?\d{4}'
+    amount: '\$?\d+(?:,\d{3})*(?:\.\d{2})?'
+    measurement: '\d+(?:\.\d+)?\s*(?:mm|cm|m|kg|g|ml|l)'
+    document_id: '(?i)(?:id|doc|document)\s*#?\s*[\w-]+'
+
+# File Paths
+paths:
+  input_dir: 'data/input'
+  output_dir: 'data/output'
+  temp_dir: 'data/temp'
+  model_dir: 'models'
+  logs_dir: 'logs'
+
+# Report Generation
+reports:
+  formats:
+    - csv
+    - docx
+    - pdf
+  include_visualizations: true
+  timestamp_format: '%Y%m%d_%H%M%S'
+  
+# Logging
+logging:
+  level: 'INFO'  # Options: DEBUG, INFO, WARNING, ERROR, CRITICAL
+  format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+  file: 'document_processing.log'
