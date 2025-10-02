@@ -78,3 +78,8 @@ htmlcov/
 !examples/sample_images/*.png
 !tests/test_data/*.jpg
 !tests/test_data/*.png
+!samples/images/*.jpg
+!samples/images/*.jpeg
+!samples/images/*.png
+!samples/output/*.png
+!samples/output/*.jpg
