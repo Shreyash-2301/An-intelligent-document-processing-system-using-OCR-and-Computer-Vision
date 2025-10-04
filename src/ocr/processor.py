@@ -50,22 +50,26 @@ class DocumentProcessor:
             np.ndarray: Preprocessed image
         """
         try:
-            # Convert to grayscale
-            if len(image.shape) == 3:
-                gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-            else:
-                gray = image
-                
-            # Apply adaptive thresholding
-            thresh = cv2.adaptiveThreshold(
-                gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, 
-                cv2.THRESH_BINARY, 11, 2
+            from src.vision.image_enhancement import (
+                enhance_image,
+                deskew_image,
+                remove_background,
+                auto_crop
             )
             
-            # Denoise
-            denoised = cv2.fastNlMeansDenoising(thresh)
+            # Enhance image quality
+            enhanced = enhance_image(image)
             
-            return denoised
+            # Deskew if needed
+            deskewed = deskew_image(enhanced)
+            
+            # Auto-crop to content
+            cropped, _ = auto_crop(deskewed)
+            
+            # Remove background noise
+            cleaned = remove_background(cropped)
+            
+            return cleaned
             
         except Exception as e:
             self.logger.error(f"Error in image preprocessing: {str(e)}")
